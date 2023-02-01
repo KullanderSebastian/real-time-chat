@@ -37,6 +37,9 @@ const styles = {
         fontWeight: 700,
         cursor: "pointer"
     },
+    error: {
+        marginBottom: "20px",
+    }
 }
 
 function RegisterForm() {
@@ -50,7 +53,7 @@ function RegisterForm() {
         validationSchema: registerSchema,
         onSubmit
     });
-    
+
     return (
         <div>
             <h1>Create your account</h1>
@@ -66,7 +69,7 @@ function RegisterForm() {
                     className={errors.alias && touched.alias ? "input-error" : ""}
                 />
                 {errors.alias && touched.alias ? (
-                    <div>{errors.alias}</div>
+                    <div style={styles.error}>{errors.alias}</div>
                 ) : null}
                 <label style={styles.label} htmlFor="email">Email</label>
                 <input
@@ -80,7 +83,7 @@ function RegisterForm() {
 
                 />
                 {errors.email && touched.email ? (
-                    <div>{errors.email}</div>
+                    <div style={styles.error}>{errors.email}</div>
                 ) : null}
                 <label style={styles.label} htmlFor="password">Password</label>
                 <input
@@ -94,7 +97,7 @@ function RegisterForm() {
 
                 />
                 {errors.password && touched.password ? (
-                    <div>{errors.password}</div>
+                    <div style={styles.error}>{errors.password}</div>
                 ) : null}
                 <label style={styles.label} htmlFor="passwordChecker">Password</label>
                 <input
@@ -108,7 +111,7 @@ function RegisterForm() {
 
                 />
                 {errors.passwordChecker && touched.passwordChecker ? (
-                    <div>{errors.passwordChecker}</div>
+                    <div style={styles.error}>{errors.passwordChecker}</div>
                 ) : null}
                 <button style={styles.button} type="submit">Register</button>
             </form>

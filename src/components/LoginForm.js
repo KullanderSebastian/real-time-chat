@@ -35,6 +35,9 @@ const styles = {
         fontWeight: 700,
         cursor: "pointer"
     },
+    error: {
+        marginBottom: "20px",
+    }
 }
 
 function LoginForm() {
@@ -62,7 +65,7 @@ function LoginForm() {
                     className={errors.email && touched.email ? "input-error" : ""}
                 />
                 {errors.email && touched.email ? (
-                    <div>{errors.email}</div>
+                    <div style={styles.error}>{errors.email}</div>
                 ) : null}
                 <label style={styles.label} htmlFor="password">Password</label>
                 <input
@@ -75,7 +78,7 @@ function LoginForm() {
                     className={errors.password && touched.password ? "input-error" : ""}
                 />
                 {errors.password && touched.password ? (
-                    <div>{errors.password}</div>
+                    <div style={styles.error}>{errors.password}</div>
                 ) : null}
                 <button style={styles.button} type="submit">Login</button>
             </form>
