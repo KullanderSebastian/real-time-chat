@@ -21,3 +21,8 @@ export const loginSchema = Yup.object().shape({
     password: Yup.string()
         .required("Required")
 })
+
+export const messageSchema = Yup.object().shape({
+    message: Yup.string()
+        .required("You cant send an empty message.")
+})
