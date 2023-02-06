@@ -104,7 +104,7 @@ function Chat() {
                         onChange={handleChange}
                         value={values.message}
                     />
-                    <button style={styles.button}>Send</button>
+                    <button type="submit" style={styles.button}>Send</button>
                 </form>
             </div>
         </div>
