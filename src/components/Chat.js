@@ -4,10 +4,6 @@ import { useFormik } from "formik";
 import { messageSchema } from "../schemas";
 import Message from "./Message";
 
-const onSubmit = (values) => {
-    console.log(values);
-}
-
 const styles = {
     chatWrapper: {
         width: "100vw",
@@ -65,7 +61,20 @@ const styles = {
         fontWeight: 700,
         cursor: "pointer",
         width: "9%",
+    },
+    logout: {
+        cursor: "pointer",
+        color: "red",
     }
+}
+
+const onSubmit = (values) => {
+    console.log(values);
+}
+
+const logout = () => {
+    sessionStorage.clear();
+    window.location.reload(false);
 }
 
 function Chat() {
@@ -89,6 +98,7 @@ function Chat() {
                         <p style={styles.users}>Users</p>
                         <p style={styles.count}>8</p>
                     </div>
+                    <p style={styles.logout} onClick={() => { logout() }}>Logout</p>
                 </div>
                 <div style={styles.chatPanel}>
                     <Message alias="John Doe" time="19:39" message="Hej hur mår ni?" />

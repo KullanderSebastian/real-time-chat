@@ -3,10 +3,7 @@ import "./../App.css";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { registerSchema } from "../schemas";
-
-const onSubmit = (values) => {
-    console.log(values);
-}
+import { useNavigate } from "react-router-dom";
 
 const styles = {
     formContainer: {
@@ -39,13 +36,41 @@ const styles = {
     },
     error: {
         marginBottom: "20px",
+    },
+    pageTitle: {
+        marginTop: "1.5em",
+        marginBottom: "0.5em",
     }
 }
 
+async function registerUser(credentials) {
+    return fetch("http://localhost:8080/api/auth/signup", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(credentials)
+    })
+    .then(data => data.json())
+}
+
 function RegisterForm() {
+    const navigate = useNavigate();
+
+    const onSubmit = async (values) => {
+        await registerUser({
+            username: values.username,
+            email: values.email,
+            password: values.password,
+            roles: ["user"]
+        });
+
+        navigate("/login");
+    }
+
     const {values, errors, touched, isSubmitting, handleBlur, handleChange, handleSubmit} = useFormik({
         initialValues: {
-            alias: "",
+            username: "",
             email: "",
             password: "",
             passwordChecker: "",
@@ -56,17 +81,17 @@ function RegisterForm() {
 
     return (
         <div>
-            <h1>Create your account</h1>
+            <h1 style={styles.pageTitle}>Create your account</h1>
             <form style={styles.formContainer} onSubmit={handleSubmit}>
-                <label style={styles.label} htmlFor="alias">Alias</label>
+                <label style={styles.label} htmlFor="username">Username</label>
                 <input
                     style={styles.input}
-                    id="alias"
-                    name="alias"
+                    id="username"
+                    name="username"
                     type="text"
                     onChange={handleChange}
-                    value={values.alias}
-                    className={errors.alias && touched.alias ? "input-error" : ""}
+                    value={values.username}
+                    className={errors.username && touched.username ? "input-error" : ""}
                 />
                 {errors.alias && touched.alias ? (
                     <div style={styles.error}>{errors.alias}</div>
